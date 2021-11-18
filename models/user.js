@@ -1,41 +1,34 @@
-const Sequelize = require('sequelize');
+const { sequelize } = require("../database/config");
+const { Model, DataTypes } = require("sequelize");
 
-const sequelize = require('../database/config');
-  
-const User = sequelize.define('user', {
-  id: {
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
-      // autoIncrement: true,
+const User = sequelize.define(
+  "User",
+  {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
+    email: {
+      type: DataTypes.STRING,
       allowNull: false,
-      primaryKey: true
+      unique: true,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+    },
   },
-  name: {
-      type: Sequelize.STRING,
-      validate: {
-        isAlpha: true
-      },
-      allowNull: false
-  },
-  email: {
-      type: Sequelize.STRING,
-      unique: true, //Not Working
-      validate:{
-        isEmail: true
-      },
-      allowNull: false
-  },
-  password: {
-      type: Sequelize.STRING(64),
-      validate:{
-        isAlphanumeric: true,
-        len: [8,64]
-      },
-      allowNull: false
+  {
+    //other options models
+    freezeTableName: true,
+    timestamps: true,
   }
-
-}, {  
-  timestamps: true
-}
 );
+
 module.exports = User;
