@@ -1,8 +1,8 @@
 const { Router } = require('express');
 const { check } = require("express-validator");
 const { login, register, listUsers } = require('../controllers/user.controller');
+const { validateFields } = require('../middlewares/validateFields');
 const router = Router();
-const { validateFields } = require('../middlewares/validateFields')
 
 router.get("/", (req, res) => {
     res.json({msg: "Hello World"});

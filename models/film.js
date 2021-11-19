@@ -27,6 +27,14 @@ const Film = sequelize.define(
     qualification:{
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    gender_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: Gender,
+        key: "id",
+      },
     }
   },
   {
