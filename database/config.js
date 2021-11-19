@@ -28,6 +28,7 @@ const startDB = async () => {
     await connection.query(`CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\`;`);
     // ! connect to db
     await sequelize.sync();
+    // await sequelize.sync({ force: true, match: /_test$/ });
     console.log("Connection has been established successfully.");
   } catch (error) {
     console.error("Unable to connect to the database:", error);
